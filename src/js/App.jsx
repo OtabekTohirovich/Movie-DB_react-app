@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "../App.css";
 import { Navbar, Main } from "./components";
@@ -7,11 +7,11 @@ function App() {
   return (
     <Box>
       <Navbar />
-      <Container fixed >
-        <Routes>
-           <Route />
-        </Routes>
-      </Container>
+
+      <Routes>
+        <Route path="/" element={<Main />} />
+        {/* <Route path="/search/:id" element={<Search />} /> */}
+      </Routes>
     </Box>
   );
 }

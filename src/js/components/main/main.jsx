@@ -1,7 +1,13 @@
+import { Box } from "@mui/material";
+import SearchComponent from "./search-component";
+
 const Main = () => {
   return (
-    <div>Main</div>
-  )
-}
+    <Box>
+      <SearchComponent />
 
-export default Main
+    </Box>
+  );
+};
+
+export default Main;
