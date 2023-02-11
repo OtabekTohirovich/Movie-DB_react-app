@@ -11,7 +11,23 @@
 .searchForm:focus {
   outline: none;
 }
-.btnSearch:hover{
+.btnSearch:hover {
   color: #032541;
 }
 
+.category-btn {
+  cursor: pointer;
+  background-color: #fff;
+}
+.scrollMovie::-webkit-scrollbar {
+  height: 3px;
+}
+
+.scrollMovie::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.scrollMovie::-webkit-scrollbar-thumb {
+  background: linear-gradient(to left,#01b4e3,#1ed5a9);
+}
