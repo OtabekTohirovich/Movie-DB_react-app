@@ -20,7 +20,7 @@
   background-color: #fff;
 }
 .scrollMovie::-webkit-scrollbar {
-  height: 3px;
+  height: 4px;
 }
 
 .scrollMovie::-webkit-scrollbar-track {

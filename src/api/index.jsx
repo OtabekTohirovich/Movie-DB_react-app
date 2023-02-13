@@ -8,3 +8,9 @@ export function fetch(type, status, page = 1) {
     `${type}/${status}?api_key=${apiKey}&language=${navigator.languages[0]}&page=${page}`
   );
 }
+
+export function fetchDetails(type, id) {
+  return axios.get(
+    `${type}/${id}?api_key=${apiKey}&language=${navigator.languages[0]}`
+  );
+}
