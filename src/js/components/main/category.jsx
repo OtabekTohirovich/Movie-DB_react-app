@@ -22,6 +22,7 @@ const Category = ({ selectedCategoryHandelar, selectedCategory, category }) => {
             key={item.name}
             className="category-btn"
             style={{
+              transition: "change 2s",
               borderRadius: "30px",
               width: "50%",
               border: "none",

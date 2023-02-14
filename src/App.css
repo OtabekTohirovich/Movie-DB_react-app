@@ -17,7 +17,7 @@
 
 .category-btn {
   cursor: pointer;
-  background-color: #ffffff81;
+  background-color: #fff;
 }
 .scrollMovie::-webkit-scrollbar {
   height: 6px;
