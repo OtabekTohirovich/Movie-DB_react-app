@@ -6,7 +6,6 @@ import Category from "./category";
 import Getmovie from "./get-movie";
 import SearchComponent from "./search-component";
 
-
 const Main = () => {
   const [selectedCategory, setSelectedCategory] = useState("movie");
   const [vedio, setvedios] = useState([]);

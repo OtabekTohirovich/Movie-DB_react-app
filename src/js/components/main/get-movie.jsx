@@ -1,15 +1,13 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import config from "../../../configs";
+import moment from "moment";
+import Progress from "./searclular-progress";
+import { collors } from "../../../constants/color";
+import Elpises from "./elpises";
 const Getmovie = ({ vedio }) => {
-  
   return (
-    <Card sx={{ margin: "10px", position: "relative" }} id={vedio.id}>
+    <Card sx={{ margin: "10px", position: "relative" , border: 'none', boxShadow: 'none' }} id={vedio.id}>
       <Link to={`/movie/${vedio.id}`}>
         <CardMedia
           image={config.baseImgURL + vedio.poster_path}
@@ -18,47 +16,45 @@ const Getmovie = ({ vedio }) => {
             width: "145px",
             height: "220px",
             objectFit: "cover",
+            borderRadius: "15px"
           }}
         />
       </Link>
-      
+      <div style={{position: "absolute" , top: '8px', right: '8px'}}>
+        <Elpises />
+      </div>
+      <div style={{position: "absolute" , bottom: '70px', left: '15px', background: collors.mainBlue, padding: '6px', borderRadius: '30px' }}>
+        <Progress vote_average={vedio.vote_average * 10} />
+      </div>
+
       <CardContent>
-        <Typography>{vedio.title ? vedio.title : vedio.name}</Typography>
+        <Typography
+          sx={{
+            fontSize: "15px",
+            fontWeight: "bold",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "10px"
+          }}
+        >
+          {vedio.title ? vedio.title.slice(0, 13) : vedio.name.slice(0, 7)}
+        </Typography>
+        <Typography sx={{ fontSize: "13px", display: "flex", justifyContent: "center" }}>
+          {vedio.first_air_date
+            ? `${
+                vedio.first_air_date
+                  ? vedio.first_air_date
+                  : moment().format("DD-MM-YYYY")
+              }`
+            : `${
+                vedio.release_date
+                  ? vedio.release_date
+                  : moment().format("YYYY-MM-DD")
+              }`}
+        </Typography>
       </CardContent>
     </Card>
   );
 };
 
 export default Getmovie;
-
-{/*
-const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-<div onClick={handleExpandClick}>
-        <GraphicEq
-          sx={{
-            cursor: "pointer",
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            color: collors.mainBlue,
-            zIndex: 1,
-          }}
-        />
-      </div>
-      <Collapse
-        in={expanded}
-        timeout="auto"
-        sx={{
-          position: "absolute",
-          top: "10px",
-          right: "0",
-          bgcolor: collors.white,
-          zIndex: 5,
-        }}
-      >
-        <Typography paragraph>Method:</Typography>
-      </Collapse> */}

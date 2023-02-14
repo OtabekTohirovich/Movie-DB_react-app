@@ -17,17 +17,32 @@
 
 .category-btn {
   cursor: pointer;
-  background-color: #fff;
+  background-color: #ffffff81;
 }
 .scrollMovie::-webkit-scrollbar {
-  height: 4px;
+  height: 6px;
 }
 
 .scrollMovie::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 .scrollMovie::-webkit-scrollbar-thumb {
-  background: linear-gradient(to left,#01b4e3,#1ed5a9);
+  background: linear-gradient(to left, #01b4e3, #1ed5a9);
+  border-radius: 10px;
+}
+
+.scrollMovie {
+  margin-top: 10px;
+}
+.progress {
+  background-color: #032541;
+  height: 35px;
+  width: 35px;
+  border-radius: 20px;
+  padding: 6px 8px;
+}
+.elpises:hover {
+  background-color: #01b4e3;
 }
