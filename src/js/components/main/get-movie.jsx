@@ -41,7 +41,7 @@ const Getmovie = ({ vedio }) => {
           borderRadius: "30px",
         }}
       >
-        <Progress vote_average={vedio.vote_average * 10} />
+        <Progress vote_average={vedio.vote_average} />
       </div>
 
       <CardContent>
@@ -55,7 +55,7 @@ const Getmovie = ({ vedio }) => {
               marginTop: "10px",
             }}
           >
-            {vedio.title ? vedio.title : vedio.name}
+            {vedio.title ? vedio.title.slice(0 ,30) : vedio.name.slice(0 ,30)}
           </Typography>
         </Link>
         <Typography

@@ -1,6 +1,6 @@
 import { Box, Container, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { fetch } from "../../../api";
+import { fetch, fetchTreanding } from "../../../api";
 import { category, categorytrend } from "../../../constants";
 import Category from "./category";
 import Getmovie from "./get-movie";
@@ -9,7 +9,7 @@ import Treanding from "./treanding";
 import Walpaper from "./Walpaper";
 
 const Main = () => {
-  const [selectedCategory, setSelectedCategory] = useState("movie");
+  const [selectedCategory, setSelectedCategory] = useState("day");
   const [selectedCategorys, setSelectedCategorys] = useState("movie");
   const [vedio, setvedios] = useState([]);
   const [vediotrend, setvediotreand] = useState([]);
@@ -18,7 +18,7 @@ const Main = () => {
     setSelectedCategorys(categorytrend);
 
   useEffect(() => {
-    fetch(selectedCategory, "popular").then(({ data }) => {
+    fetchTreanding( "movie" ,selectedCategory).then(({ data }) => {
       setvedios(data.results);
     });
     fetch(selectedCategorys, "popular").then(({ data }) => {
@@ -27,7 +27,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    fetch(selectedCategory, "popular").then(({ data }) => {
+    fetchTreanding("movie" ,selectedCategory).then(({ data }) => {
       setvedios(data.results);
     });
   }, [selectedCategory]);
@@ -46,6 +46,7 @@ const Main = () => {
           selectedCategoryHandelar={selectedCategoryHandelar}
           selectedCategory={selectedCategory}
           category={category}
+          name={"Trending"}
         />
         <Stack
           className="scrollMovie"

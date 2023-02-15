@@ -1,10 +1,21 @@
 import { Stack, Typography } from "@mui/material";
 import { collors } from "../../../constants/color";
 
-const Category = ({ selectedCategoryHandelar, selectedCategory, category }) => {
+const Category = ({
+  selectedCategoryHandelar,
+  selectedCategory,
+  category,
+  name,
+}) => {
   return (
-    <Stack direction={"row"} alignItems={'center'}>
-      <Typography variant="h5" fontWeight={'bold'} sx={{marginTop: "20px", marginRight: '20px'}}>Popular</Typography>
+    <Stack direction={"row"} alignItems={"center"}>
+      <Typography
+        variant="h5"
+        fontWeight={"bold"}
+        sx={{ marginTop: "20px", marginRight: "20px", color: name === "Latest Trailers" && collors.white }}
+      >
+        {name}
+      </Typography>
       <Stack
         direction={"row"}
         border={"2px solid"}
@@ -14,9 +25,9 @@ const Category = ({ selectedCategoryHandelar, selectedCategory, category }) => {
           marginTop: "20px",
           height: "34px",
           borderColor: collors.lightblue,
+          background: collors.white,
         }}
       >
-        
         {category.map((item) => (
           <button
             key={item.name}

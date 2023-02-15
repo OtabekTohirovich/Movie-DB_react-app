@@ -1,6 +1,6 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import Category from "./category";
-import Getmovie from "./get-movie";
+import GetMovieVedio from "./getmovie-vedio";
 
 const Treanding = ({selectedCategoryHandelar, vedio, category, selectedCategory}) => {
   return (
@@ -22,15 +22,16 @@ const Treanding = ({selectedCategoryHandelar, vedio, category, selectedCategory}
           selectedCategoryHandelar={selectedCategoryHandelar}
           selectedCategory={selectedCategory}
           category={category}
+          name={"Latest Trailers"}
         />
         <Stack
           className="scrollMovie"
           display={"flex"}
           flexDirection={"row"}
-          sx={{ overflowX: "scroll", height: "385px"}}
+          sx={{ overflowX: "scroll", height: "285px"}}
         >
           {vedio.map((item) => (
-            <Box key={item.id}>{item.id && <Getmovie vedio={item} />}</Box>
+            <Box key={item.id}>{item.id && <GetMovieVedio vedio={item} />}</Box>
           ))}
         </Stack>
       </Container>
