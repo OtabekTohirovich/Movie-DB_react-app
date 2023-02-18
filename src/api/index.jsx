@@ -27,5 +27,10 @@ export function fetchLatest(type, status, page = 1) {
   );
 }
 
+export function fetchMovieVedio(type, movie_id) {
+  let url = `${type}/${movie_id}/videos?api_key=${apiKey}&language=en-US`;
 
-// https://api.themoviedb.org/3/movie/latest?api_key=frfreferfref&language=en-US
+  return axios.get(url);
+}
+
+// https://api.themoviedb.org/3/movie/804095/videos?api_key=ea4c56d50a17f4673be5e41527930787&language=en-US

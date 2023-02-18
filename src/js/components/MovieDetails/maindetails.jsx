@@ -14,10 +14,28 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import React ,{ useEffect, useState } from "react";
+import ReactPlayer from 'react-player'
+import { useParams } from "react-router-dom";
+import { fetchMovieVedio } from "../../../api";
 import config from "../../../configs";
 import { collors } from "../../../constants/color";
 import Progress from "../main/searclular-progress";
 const Maindetails = ({ vediodetail }) => {
+  const {id} = useParams()
+  const [media, setmedia] = useState();
+  const [start, setstart] = useState(false);
+  useEffect(() => {
+    fetchMovieVedio("movie", id).then(({ data }) => {
+      setmedia(data.results[0]);
+    });
+  }, []);
+
+
+  const handlerVedio =()=>{
+    setstart(!start)
+  }
+
   return (
     <Stack
       direction={"row"}
@@ -32,14 +50,16 @@ const Maindetails = ({ vediodetail }) => {
         backgroundSize: "cover",
         boxShadow: "inset 3000px 3000px 8000px #403636d9",
         width: "100%",
-        height: '90vh'
+        height: "90vh",
       }}
     >
       <Container>
-        <Stack direction={"row"} sx={{margin: "100px 0"}}>
+        <Stack direction={"row"} sx={{ margin: "100px 0" }}>
+          
+        
           <Box>
             <CardMedia
-              image={config.baseImgURL + vediodetail.poster_path}
+              image={config.baseImgURL + vediodetail?.poster_path}
               alt={vediodetail.title}
               sx={{
                 width: "350px",
@@ -47,11 +67,10 @@ const Maindetails = ({ vediodetail }) => {
                 objectFit: "cover",
                 borderRadius: "15px",
                 display: "flex",
-                
               }}
             />
           </Box>
-          <Box sx={{ margin: "100px 50px" , color: collors.white }}>
+          <Box sx={{ margin: "100px 50px", color: collors.white }}>
             <Typography
               variant="p"
               fontWeight={"700"}
@@ -73,7 +92,7 @@ const Maindetails = ({ vediodetail }) => {
                   transform: "scale(1.3)",
                 }}
               >
-                <Progress vote_average={vediodetail.vote_average} />
+                <Progress vote_average={vediodetail?.vote_average} />
               </div>
 
               <Typography
@@ -121,9 +140,20 @@ const Maindetails = ({ vediodetail }) => {
                 />
               </div>
             </Stack>
-            <Typography variant="h5" marginTop={'30px'} fontWeight={"bold"}>{vediodetail.release_date}</Typography>
-            <Typography marginTop={'10px'} fontWeight={"bold"}>{vediodetail.status}</Typography>
-            <Button  variant="outlined" sx={{ color: "#fff", borderColor: "#fff" , marginTop: '40px'}}>Show vedio</Button>
+            <Typography variant="h5" marginTop={"30px"} fontWeight={"bold"}>
+              {vediodetail?.release_date}
+            </Typography>
+            <Typography marginTop={"10px"} fontWeight={"bold"}>
+              {vediodetail?.status}
+            </Typography>
+            <Button
+              onClick={handlerVedio}
+              variant="outlined"
+              sx={{ color: "#fff", borderColor: "#fff", marginTop: "40px" }}
+            >
+              Show vedio
+            </Button>
+            {start ? <ReactPlayer  url={`https://www.youtube.com/watch?v=${media?.key}`} controls /> : ""}
           </Box>
         </Stack>
       </Container>

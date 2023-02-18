@@ -6,6 +6,7 @@ import Progress from "./searclular-progress";
 import { collors } from "../../../constants/color";
 import Elpises from "./elpises";
 const Getmovie = ({ vedio }) => {
+
   return (
     <Card
       sx={{
@@ -55,11 +56,16 @@ const Getmovie = ({ vedio }) => {
               marginTop: "10px",
             }}
           >
-            {vedio.title ? vedio.title.slice(0 ,30) : vedio.name.slice(0 ,30)}
+            {vedio.title ? vedio.title.slice(0, 30) : vedio.name.slice(0, 30)}
           </Typography>
         </Link>
         <Typography
-              sx={{ fontSize: "14px", display: "flex", justifyContent: "center", marginTop: "4px" }}
+          sx={{
+            fontSize: "14px",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "4px",
+          }}
         >
           {vedio.first_air_date
             ? `${
