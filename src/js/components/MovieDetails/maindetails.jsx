@@ -3,6 +3,7 @@ import {
   BookmarkBorder,
   Favorite,
   FavoriteBorder,
+  Login,
 } from "@mui/icons-material";
 import {
   Box,
@@ -14,27 +15,27 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React ,{ useEffect, useState } from "react";
-import ReactPlayer from 'react-player'
+import zIndex from "@mui/material/styles/zIndex";
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import { fetchMovieVedio } from "../../../api";
 import config from "../../../configs";
 import { collors } from "../../../constants/color";
 import Progress from "../main/searclular-progress";
 const Maindetails = ({ vediodetail }) => {
-  const {id} = useParams()
+  const { id } = useParams();
   const [media, setmedia] = useState();
   const [start, setstart] = useState(false);
   useEffect(() => {
     fetchMovieVedio("movie", id).then(({ data }) => {
-      setmedia(data.results[0]);
+      setmedia(data?.results[0]);
     });
   }, []);
 
-
-  const handlerVedio =()=>{
-    setstart(!start)
-  }
+  const handlerVedio = () => {
+    setstart(!start);
+  };
 
   return (
     <Stack
@@ -43,34 +44,47 @@ const Maindetails = ({ vediodetail }) => {
         backgroundImage: `url(${
           config.baseImgURL + vediodetail.backdrop_path
         })`,
+
         backgroundPositionX: "left",
         backgroundPositionY: "center",
         objectFit: "cover",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        boxShadow: "inset 3000px 3000px 8000px #403636d9",
+        boxShadow: `${
+          start
+            ? "inset 3000px 3000px 8000px #fff432"
+            : "inset 3000px 3000px 8000px #403636d9"
+        }`,
         width: "100%",
-        height: "90vh",
+        height: "92vh",
       }}
     >
       <Container>
         <Stack direction={"row"} sx={{ margin: "100px 0" }}>
-          
-        
           <Box>
-            <CardMedia
-              image={config.baseImgURL + vediodetail?.poster_path}
-              alt={vediodetail.title}
-              sx={{
-                width: "350px",
-                height: "550px",
-                objectFit: "cover",
-                borderRadius: "15px",
-                display: "flex",
-              }}
-            />
+            {start ? (
+              ""
+            ) : (
+              <CardMedia
+                image={config.baseImgURL + vediodetail?.poster_path}
+                alt={vediodetail.title}
+                sx={{
+                  width: "350px",
+                  height: "550px",
+                  objectFit: "cover",
+                  borderRadius: "15px",
+                  display: "flex",
+                }}
+              />
+            )}
           </Box>
-          <Box sx={{ margin: "100px 50px", color: collors.white }}>
+          <Box
+            sx={{
+              margin: "100px 50px",
+              color: collors.white,
+              position: "relative",
+            }}
+          >
             <Typography
               variant="p"
               fontWeight={"700"}
@@ -146,14 +160,45 @@ const Maindetails = ({ vediodetail }) => {
             <Typography marginTop={"10px"} fontWeight={"bold"}>
               {vediodetail?.status}
             </Typography>
-            <Button
-              onClick={handlerVedio}
-              variant="outlined"
-              sx={{ color: "#fff", borderColor: "#fff", marginTop: "40px" }}
-            >
-              Show vedio
-            </Button>
-            {start ? <ReactPlayer  url={`https://www.youtube.com/watch?v=${media?.key}`} controls /> : ""}
+            {media ? (
+              <Button
+                onClick={handlerVedio}
+                variant="outlined"
+                sx={{ color: "#fff", borderColor: "#fff", marginTop: "40px" }}
+              >
+                Show vedio
+              </Button>
+            ) : (
+              ""
+            )}
+
+            {start ? (
+              <Box>
+                <ReactPlayer
+                  style={{
+                    position: "absolute",
+                    top: "5%",
+                    left: "-35%",
+                    zIndex: 1,
+                  }}
+                  url={`https://www.youtube.com/watch?v=${media?.key}`}
+                  controls
+                />
+                <Button
+                  onClick={handlerVedio}
+                  sx={{
+                    position: "absolute",
+                    top: "-5%",
+                    right: "-35%",
+                    padding: "3px 0",
+                  }}
+                >
+                  <Login />
+                </Button>
+              </Box>
+            ) : (
+              ""
+            )}
           </Box>
         </Stack>
       </Container>
